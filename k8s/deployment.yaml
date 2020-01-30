@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: webapp
+  template:
+    metadata:
+      labels:
+        app: webapp
+    spec:
+      containers:
+      - image: eu.gcr.io/injenia-gcp-demo/esselunga-test:latest
+        name:  tomcat
+        ports:
+        - containerPort: 8080
