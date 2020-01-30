@@ -10,14 +10,14 @@ steps:
 - name: 'gcr.io/cloud-builders/docker'
   args:
   - 'build'
-  - '--tag=eu.gcr.io/injenia-gcp-demo/esselunga-test:$BRANCH_NAME'
-  - '--tag=eu.gcr.io/injenia-gcp-demo/esselunga-test:$SHORT_SHA'
-  - '--tag=eu.gcr.io/injenia-gcp-demo/esselunga-test:latest'
+  - '--tag=eu.gcr.io/$PROJECT_ID/webapp-test:$BRANCH_NAME'
+  - '--tag=eu.gcr.io/$PROJECT_ID/webapp-test:$SHORT_SHA'
+  - '--tag=eu.gcr.io/$PROJECT_ID/webapp-test:latest'
   - '.'
 
 # Push the image, it will be used in the next step
 - name: 'gcr.io/cloud-builders/docker'
-  args: ["push", "eu.gcr.io/injenia-gcp-demo/esselunga-test:$SHORT_SHA"]
+  args: ["push", "eu.gcr.io/$PROJECT_ID/webapp-test:$SHORT_SHA"]
 
 # Deploy
 - name: 'gcr.io/cloud-builders/kubectl'
@@ -28,9 +28,9 @@ steps:
   - set
   - image
   - 'deployment/webapp'
-  - 'tomcat=eu.gcr.io/injenia-gcp-demo/esselunga-test:$SHORT_SHA'
+  - 'tomcat=eu.gcr.io/$PROJECT_ID/webapp-test:$SHORT_SHA'
   - '--namespace=default'
 
 images:
-- 'eu.gcr.io/injenia-gcp-demo/esselunga-test:$BRANCH_NAME'
-- 'eu.gcr.io/injenia-gcp-demo/esselunga-test:$SHORT_SHA'
+- 'eu.gcr.io/$PROJECT_ID/webapp-test:$BRANCH_NAME'
+- 'eu.gcr.io/$PROJECT_ID/webapp-test:$SHORT_SHA'
