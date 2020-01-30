@@ -12,12 +12,12 @@ steps:
   - 'build'
   - '--tag=eu.gcr.io/injenia-gcp-demo/esselunga-test:$BRANCH_NAME'
   - '--tag=eu.gcr.io/injenia-gcp-demo/esselunga-test:$SHORT_SHA'
-  - '--tag=eu.gcr.io/injenia-gcp-demo/esselunga-test:localhost'
+  - '--tag=eu.gcr.io/injenia-gcp-demo/esselunga-test:latest'
   - '.'
 
 # Push the image, it will be used in the next step
 - name: 'gcr.io/cloud-builders/docker'
-  args: ["push", "eu.gcr.io/injenia-gcp-demo/esselunga-test:localhost"]
+  args: ["push", "eu.gcr.io/injenia-gcp-demo/esselunga-test:latest"]
 
 # # Deploy
 # - name: 'gcr.io/cloud-builders/kubectl'
